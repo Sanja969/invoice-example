@@ -9,7 +9,7 @@ const Home = () => {
   let sumPrice = 0;
   const dispatch = useDispatch();
   return (
-    items === {} ? <h2>No invoices yet</h2> :
+    <>{Object.keys(items).length === 0 ? <h2>No invoices yet</h2> :
     <HomeContainer>
       <h2>Invoices</h2>
       <div>
@@ -34,7 +34,8 @@ const Home = () => {
     </div>
     <h2>Total: ${sumPrice}</h2>
     </HomeContainer>
-  )
+    
+  }</>)
 }
 
 export default Home;
