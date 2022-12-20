@@ -13,7 +13,13 @@ const Home = () => {
     <HomeContainer>
       <h2>Invoices</h2>
       <div>
-
+      <ItemContainer>
+          <h3>Name</h3>
+          <p>Quantity</p>
+          <p>Price</p>
+          <p>Delete</p>
+          
+        </ItemContainer>
       {
       Object.keys(items).map(itemNumber => {
         const item = items[itemNumber]

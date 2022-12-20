@@ -51,4 +51,7 @@ export const ItemContainer = styled.div`
     padding: 10px;
     border-radius: 5px;
   }
+  &:first-child {
+    background-color: yellow;
+  }
 `;
