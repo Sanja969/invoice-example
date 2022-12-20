@@ -1,9 +1,10 @@
 const express = require('express');
-const { httpGetAllItems, httpAddNewItem } = require('./items.controller')
+const { httpGetAllItems, httpAddNewItem, httpDeleteItem } = require('./items.controller')
 
-const ItemsRouter = express.Router();
+const itemsRouter = express.Router();
 
-ItemsRouter.get('/', httpGetAllItems);
-ItemsRouter.post('/', httpAddNewItem);
+itemsRouter.get('/', httpGetAllItems);
+itemsRouter.post('/', httpAddNewItem);
+itemsRouter.delete('/:id', httpDeleteItem);
 
-module.exports = ItemsRouter;
+module.exports = itemsRouter;

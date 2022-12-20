@@ -19,9 +19,15 @@ export const itemsReducer = (state = INITIAL_STATE, { type, payload }) => {
     case ITEMS_ACTION_TYPES.POST_ITEM_START:
       return { ...state, isLoading: true }
     case ITEMS_ACTION_TYPES.POST_ITEM_SUCCESS:
-      return state;
+      return { ...state, items: payload, isLoading: false }
     case ITEMS_ACTION_TYPES.POST_ITEM_FAILED:
       return { ...state,  error: payload, isLoading: false }
+      case ITEMS_ACTION_TYPES.DELETE_ITEM_START:
+        return { ...state, isLoading: true }
+      case ITEMS_ACTION_TYPES.DELETE_ITEM_SUCCESS:
+        return { ...state, items: payload, isLoading: false }
+      case ITEMS_ACTION_TYPES.DELETE_ITEM_FAILED:
+        return { ...state,  error: payload, isLoading: false }
     default:
       return state;
   }

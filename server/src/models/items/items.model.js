@@ -33,7 +33,21 @@ async function createItem(item) {
   await saveItem(newItem);
 }
 
+async function findItem(filter) {
+  return await items.findOne(filter);
+}
+
+async function ifExistItem(id) {
+  return await findItem({itemNumber: id});
+}
+
+async function deleteItem(itemId) {
+  await items.deleteOne({itemNumber: itemId})
+}
+
 module.exports = {
   getAllItems,
-  createItem
+  createItem,
+  deleteItem,
+  ifExistItem,
 }

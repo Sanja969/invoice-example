@@ -38,7 +38,17 @@ export const ItemContainer = styled.div`
     text-align: center;
     height: 50px;
     margin: 0;
-    padding: 15px;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  button {
+    cursor: pointer;
+    border: none;
+    width: 100px;
+    background-color: orange;
+    padding: 10px;
+    border-radius: 5px;
   }
 `;

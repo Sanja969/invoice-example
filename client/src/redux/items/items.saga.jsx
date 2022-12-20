@@ -6,15 +6,16 @@ import {
   fetchItemsFailed,
   postItemSuccess,
   postItemFailed,
+  deleteItemSuccess,
+  deleteItemFailed
 } from './items.actions';
 import { ITEMS_ACTION_TYPES } from './items.types';
-import axios from 'axios';
 
 const url = `http://localhost:8000/v1/items`
 
 const getItems = async() => {
   const response = await fetch(url);
-  return response.json();
+  return await response.json();
 }
 export function* fetchItemsAsync() {
   try {
@@ -30,9 +31,15 @@ export function* onFetchItems() {
 }
 
 const saveItem = async (payload) => {
-  axios.post(url, payload,
-      { headers: {'Content-Type': 'application/json'}},
-    );
+  const response = await fetch(url,
+    {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {
+       "Content-Type": "application/json"
+      },
+    });
+    return await response.json();
 }
 
 export function* saveItemAsync({payload}) {
@@ -48,6 +55,31 @@ export function* onPostItem() {
   yield takeLatest(ITEMS_ACTION_TYPES.POST_ITEM_START, saveItemAsync);
 }
 
+const deleteItem = async (payload) => {
+  const response = await fetch(`${url}/${payload}`,
+  {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+  )
+  return await response.json();
+}
+
+export function* deleteItemAsync({payload}) {
+  try {
+    const itemSaved = yield call(deleteItem, payload);
+    yield put(deleteItemSuccess(itemSaved));
+  } catch (error) {
+    yield put(deleteItemFailed(error));
+  }
+}
+
+export function* onDeleteItem() {
+  yield takeLatest(ITEMS_ACTION_TYPES.DELETE_ITEM_START, deleteItemAsync);
+}
+
 export function* itemsSaga() {
-  yield all([call(onFetchItems), call(onPostItem)]);
+  yield all([call(onFetchItems), call(onPostItem), call(onDeleteItem)]);
 }

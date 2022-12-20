@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { getAllItems, createItem } = require('../../models/items/items.model');
+const { getAllItems, createItem, deleteItem, ifExistItem } = require('../../models/items/items.model');
 
 async function httpGetAllItems(req, res) {
   const items = await getAllItems()
@@ -28,10 +28,25 @@ async function httpAddNewItem(req, res) {
   }
 
   await createItem(item);
-  return res.status(201).json(item);
+  const items = await getAllItems()
+  return res.status(201).json(items);
+}
+
+async function httpDeleteItem(req, res) {
+  const itemId = Number(req.params.id);
+  const existItem = await ifExistItem(itemId)
+  if (!existItem) {
+    return res.status(404).json({
+      error: 'Item not found'
+    })
+  }
+  await deleteItem(itemId);
+  const items = await getAllItems()
+  return res.status(202).json(items);
 }
 
 module.exports = {
   httpGetAllItems,
-  httpAddNewItem
+  httpAddNewItem,
+  httpDeleteItem,
 }

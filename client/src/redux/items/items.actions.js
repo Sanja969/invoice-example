@@ -31,3 +31,19 @@ export const postItemFailed = (error) => ({
   type: ITEMS_ACTION_TYPES.POST_ITEM_FAILED,
   payload: error,
 })
+
+export const deleteItemStart = (id) => (
+  {
+  type: ITEMS_ACTION_TYPES.DELETE_ITEM_START,
+  payload: id,
+})
+
+export const deleteItemSuccess = (id) =>( {
+  type: ITEMS_ACTION_TYPES.DELETE_ITEM_SUCCESS,
+  payload: id,
+})
+
+export const deleteItemFailed = (error) => ({
+  type: ITEMS_ACTION_TYPES.DELETE_ITEM_FAILED,
+  payload: error,
+})
