@@ -12,7 +12,7 @@ const itemsSchema = new mongoose.Schema({
   },
   quantity: {
     type: String,
-    default: new Date(),
+    required: true,
   },
   price: {
     type: Float,
