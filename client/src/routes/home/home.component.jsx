@@ -16,6 +16,7 @@ const Home = () => {
       <ItemContainer>
           <h3>Name</h3>
           <p>Quantity</p>
+          <p>Price per unit</p>
           <p>Price</p>
           <p>Delete</p>
           
@@ -29,6 +30,7 @@ const Home = () => {
           <h3>{item.itemName}</h3>
           <p>{item.quantity}</p>
           <p>${item.price}</p>
+          <p>${item.price * item.quantity}</p>
           <p>
           <button onClick={() => {dispatch(deleteItemStart(itemNumber))}}>Delete</button>
           </p>
